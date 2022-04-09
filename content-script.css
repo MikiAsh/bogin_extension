@@ -1,0 +1,32 @@
+#boginExtContent {
+  width: 300px;
+  height: fit-content;
+  min-height: 100px;
+  padding: 14px 20px;
+  border: 3px solid #e52b51;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: rgb(0 0 0 / 30%) 0px 10px 36px 0px, rgb(0 0 0 / 10%) 0px 0px 0px 1px;
+  border-bottom-right-radius: 24px;
+  border-top-left-radius: 24px;
+  position: absolute;
+  right: 60px;
+  top: 20%;
+  display: flex;
+  flex-direction: column;
+}
+
+#boginExtContent .clickable {
+  margin: 12px 0;
+  font-size: 32px;
+  border: none;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 8px;
+  color: #f5efef;
+  background-color: #e52b51;
+}
+
+#boginExtContent .clickable:hover {
+  box-shadow: rgb(0 0 0 / 38%) 0px 5px 12px;
+  color: white;
+}
+

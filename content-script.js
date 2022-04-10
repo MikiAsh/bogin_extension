@@ -37,7 +37,7 @@ let myContent;
 (function onload() {
   // console.log('Bogin extenstion', 'onload');
   // observePageChange();
-  createLayer();
+  waitUntilElementExists(loginAppSelector, createLayer);
 })();
 
 function createLayer() {
@@ -141,7 +141,7 @@ function whereAmI() {
     : steps.unknown;
 }
 
-function waitUntilElementExists(selector, callback, repetitions = 10) {
+function waitUntilElementExists(selector, callback, repetitions = 12) {
   let i = 0;
   const intervalId = window.setInterval(function () {
     const element = sel(selector);

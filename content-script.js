@@ -150,13 +150,13 @@ function waitUntilElementExists(selector, callback, repetitions = 12) {
       callback();
     }
     if (++i === repetitions) {
-        window.clearInterval(intervalID);
+        window.clearInterval(intervalId);
     }
   }, 100);
 }
 
 function getNextButton() {
-  return document.querySelector(nextButtonSelector);
+  return sel(nextButtonSelector);
 }
 
 function sel(selector) {

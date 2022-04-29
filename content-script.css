@@ -25,6 +25,11 @@
   background-color: #e52b51;
 }
 
+.clickable.okta {
+  background-color: #00297a !important;
+  color: #fff !important;
+}
+
 #boginExtContent .clickable:hover {
   box-shadow: rgb(0 0 0 / 38%) 0px 5px 12px;
   color: white;

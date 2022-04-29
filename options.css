@@ -1,0 +1,45 @@
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  min-height: 400px;
+  min-width: 1250px;
+  padding: 24px;
+  font-size: 18px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  position: relative;
+}
+
+input, button { font-size: 18px; }
+
+input {
+  width: 200px;
+}
+
+input[name='email'] {
+  width: 320px;
+}
+
+.line {
+  margin-bottom: 24px;
+}
+
+label {
+  margin-right: 24px;
+}
+
+button + button {
+  margin-left: 20px;
+}
+
+#clearAll {
+  margin-top: 12px;
+}
+
+#msg {
+  position: absolute;
+  bottom: 32px;
+  right: 62px;
+  color: #050867
+}

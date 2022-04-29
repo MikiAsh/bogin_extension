@@ -4,7 +4,7 @@
   "version": "1.0",
   "manifest_version": 3,
   "author": "Miki Ashkenazi",
-  "permissions": ["activeTab"],
+  "permissions": ["storage"],
   "content_scripts": [
     {
       "matches": ["https://app.hibob.com/*", "https://localhost.hibob.com/*"],
@@ -12,6 +12,9 @@
       "css": ["content-script.css"]
     }
   ],
+  "options_ui": {
+    "page": "options.html"
+  },
   "action": {
     "default_icon": {
       "16": "/images/logo16.png",

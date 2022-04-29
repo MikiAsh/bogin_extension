@@ -63,6 +63,7 @@ function saveToStorage(data) {
 function populateForms(storeData) {
   // log(storeData);
   // [{"email":"test1@kaka.com","label":"comp1","password":"kaka"}]
+  showOktaImage();
   storeData.forEach((item, index) => {
     const formName = item.okta ? OKTA_FORM_NAME : `form${index+1}`;
     const labelEl = document[formName].label;
@@ -91,6 +92,12 @@ function clearRow(frm) {
   frm.email.disabled = false;
   frm.save.disabled = false;
   response('Row cleared');
+}
+
+function showOktaImage() {
+  const image = document.createElement("img");
+  image.src = chrome.runtime.getURL("images/okta.png");
+  sel('#oktaPlaceholder').append('Bob\'s ', image, ' account');
 }
 
 sel("#clearAll").addEventListener("click", () => {

@@ -8,6 +8,7 @@ body {
   padding: 24px;
   font-size: 18px;
   font-family: Verdana, Arial, Helvetica, sans-serif;
+  background-color: #f9f7f1;
   position: relative;
 }
 
@@ -31,6 +32,16 @@ label {
 
 button + button {
   margin-left: 20px;
+}
+
+#oktaPlaceholder {
+  display: inline-block;
+  width: 290px;
+  margin-right: 25px;
+}
+
+#oktaPlaceholder img {
+  width: 54px;
 }
 
 #clearAll {

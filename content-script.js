@@ -1,6 +1,6 @@
 const loginAppSelector = "app-login";
 const emailSelector = "input[type=email]";
-const pwrdSelector = "input[type=password]";
+const pwrdSelector = "input[type=password]:not([hidden])";
 const nextButtonSelector = ".email-next-button button";
 const welcomBackSelector = "b-avatar-image.avatar";
 const printedEmailSelector =
@@ -16,23 +16,7 @@ const steps = {
   okta: "okta",
   unknown: "unknown",
 };
-  // let myLogins = [
-  // {
-  //   label: "Demo",
-  //   email: "miki.ashkenazi+demo@hibob.io",
-  //   password: "SecretDemo1",
-  // },
-  // {
-  //   label: "mi3",
-  //   email: "miki.ashkenazi+mi3@hibob.io",
-  //   password: "SecretDemo3",
-  // },
-  // {
-  //   label: "bob",
-  //   email: "miki.ashkenazi@hibob.io",
-  //   okta: true,
-  // },
-  // ];
+
 let myContent;
 
 (function onload() {
@@ -75,7 +59,8 @@ function createClickableLogins() {
       waitUntilElementExists(pageLoadedSelector, createClickableLogins);
     });
 
-  for (loginConfig of myLogins) {
+  let hasClickable = false;
+  for ([idx, loginConfig] of myLogins.entries()) {
     if (whereAmI() === steps.okta) {
       createOktaClickable();
       break;
@@ -84,8 +69,12 @@ function createClickableLogins() {
       alreadyLoggedInEmail &&
       alreadyLoggedInEmail.trim() !== loginConfig.email
     ) {
+      if (idx === myLogins.length - 1 && !hasClickable) {
+        emptyClickable();
+      }
       continue;
     }
+    hasClickable = true;
     const login = loginConfig; // to avoid closure
     const clickable = document.createElement("button");
     const className = loginConfig.okta ? 'clickable okta' : 'clickable';
@@ -98,9 +87,6 @@ function createClickableLogins() {
     clickable.addEventListener("mouseover", function () {
       optionHovered(login);
     });
-    clickable.addEventListener("mouseout", function () {
-      optionUnhovered();
-    });
     myContent.appendChild(clickable);
   }
 }
@@ -108,7 +94,7 @@ function createClickableLogins() {
 function createOktaClickable() {
   const clickable = document.createElement("button");
   clickable.type = "button";
-  clickable.className = "clickable";
+  clickable.className = "clickable okta";
   clickable.innerText = myLogins.find((login) => login.okta).label;
   clickable.addEventListener("click", function () {
     sel(oktaButtonSelector).click();
@@ -119,10 +105,10 @@ function createOktaClickable() {
 function optionClicked(loginConfig) {
   if (whereAmI() === steps.email) {
     fillEmail(loginConfig);
-    loginConfig.password && fillPassword(loginConfig);
+    loginConfig.password && waitUntilElementExists(pwrdSelector, fillPassword, loginConfig);
   }
   if (whereAmI() === steps.pwrd) {
-    fillPassword(loginConfig);
+    waitUntilElementExists(pwrdSelector, fillPassword, loginConfig);
   }
 }
 
@@ -132,10 +118,15 @@ function optionHovered(loginConfig) {
   }
 }
 
-function optionUnhovered() {
-  if (whereAmI() === steps.email) {
-    sel(emailSelector).value = '';
-  }
+function emptyClickable() {
+  const clickable = document.createElement("button");
+  clickable.type = "button";
+  clickable.className = 'clickable empty';
+  clickable.innerText = '😲';
+  clickable.addEventListener("click", function () {
+    clickable.innerText = clickable.innerText === '😲' ? '🥱' : '😲';
+  });
+  myContent.appendChild(clickable);
 }
 
 function fillEmail(loginConfig) {
@@ -145,12 +136,10 @@ function fillEmail(loginConfig) {
 }
 
 function fillPassword(loginConfig) {
-  setTimeout(() => {
-    const pwrd = document.querySelector(pwrdSelector);
-    pwrd.value = loginConfig.password;
-    pwrd.dispatchEvent(new Event("input", { bubbles: true }));
-    getNextButton().click();
-  }, 1000);
+  const pwrd = sel(pwrdSelector);
+  pwrd.value = loginConfig.password;
+  pwrd.dispatchEvent(new Event("input", { bubbles: true }));
+  getNextButton().click();
 }
 
 // Utility functions
@@ -169,16 +158,20 @@ function whereAmI() {
     : steps.unknown;
 }
 
-function waitUntilElementExists(selector, callback, repetitions = 12) {
+function waitUntilElementExists(selector, callback, callbackArg) {
   let i = 0;
+  const repetitions = 30;
   const intervalId = window.setInterval(function () {
     const element = sel(selector);
     if (element) {
       clearInterval(intervalId);
-      callback();
+      if (callbackArg) 
+        callback(callbackArg);
+      else callback();
     }
     if (++i === repetitions) {
       window.clearInterval(intervalId);
+      // console.log('* Bogin extenstion *', 'waitUntilElementExists() reached max iteration.', 'Element',selector , 'Not Found');
     }
   }, 100);
 }

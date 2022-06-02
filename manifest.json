@@ -7,7 +7,7 @@
   "permissions": ["storage"],
   "content_scripts": [
     {
-      "matches": ["https://app.hibob.com/*", "https://localhost.hibob.com/*"],
+      "matches": ["https://app.hibob.com/*", "https://localhost.hibob.com/*", "https://app.stage.hibob.com/*"],
       "js": ["content-script.js"],
       "css": ["content-script.css"]
     }

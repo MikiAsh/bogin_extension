@@ -3,8 +3,9 @@
 *::after { box-sizing: border-box; }
 
 body {
-  min-height: 400px;
+  min-height: 458px;
   min-width: 1250px;
+  overflow-y: hidden;
   padding: 24px;
   font-size: 18px;
   font-family: Verdana, Arial, Helvetica, sans-serif;

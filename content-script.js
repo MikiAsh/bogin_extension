@@ -160,7 +160,7 @@ function whereAmI() {
 
 function waitUntilElementExists(selector, callback, callbackArg) {
   let i = 0;
-  const repetitions = 30;
+  const repetitions = 50;
   const intervalId = window.setInterval(function () {
     const element = sel(selector);
     if (element) {
@@ -171,7 +171,7 @@ function waitUntilElementExists(selector, callback, callbackArg) {
     }
     if (++i === repetitions) {
       window.clearInterval(intervalId);
-      // console.log('* Bogin extenstion *', 'waitUntilElementExists() reached max iteration.', 'Element',selector , 'Not Found');
+      console.log('* Bogin extenstion *', 'waitUntilElementExists() reached max iteration.', 'Element',selector , 'Not Found');
     }
   }, 100);
 }
@@ -185,7 +185,6 @@ function sel(selector) {
 }
 
 // Storage
-
 
 function listenForStorageChanges() {
   chrome.storage.onChanged.addListener((changes, areaName) => {

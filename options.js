@@ -62,9 +62,10 @@ function saveToStorage(data) {
 
 function populateForms(storeData) {
   // log(storeData);
-  // [{"email":"test1@kaka.com","label":"comp1","password":"kaka"}]
   showOktaImage();
-  storeData.forEach((item, index) => {
+
+  let index = 0;
+  storeData.forEach((item) => {
     const formName = item.okta ? OKTA_FORM_NAME : `form${index+1}`;
     const labelEl = document[formName].label;
     const emailEl = document[formName].email;
@@ -78,6 +79,7 @@ function populateForms(storeData) {
     labelEl.disabled = true;
     emailEl.disabled = true;
     document[formName].save.disabled = true;
+    index = item.okta ? index : index + 1;
   });
 }
 

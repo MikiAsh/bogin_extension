@@ -1,7 +1,7 @@
 {
   "name": "Bogin",
   "description": "Instant login to Bob with a single click",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 3,
   "author": "Miki Ashkenazi",
   "permissions": ["storage"],

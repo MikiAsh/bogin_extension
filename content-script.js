@@ -2,9 +2,9 @@ const loginAppSelector = "app-login";
 const emailSelector = "input[type=email]";
 const pwrdSelector = "input[type=password]:not([hidden])";
 const nextButtonSelector = ".email-next-button button";
-const welcomBackSelector = "b-avatar-image.avatar";
+const welcomeBackSelector = "b-avatar-image.avatar";
 const printedEmailSelector =
-  welcomBackSelector + " + div, b-back-button ~ b-display-1 + div";
+  welcomeBackSelector + " + div, b-back-button ~ b-display-1 + div";
 const oktaButtonSelector =
   ".inner-wrapper b-button[sso-method=okta-btn] button";
 const switchAccountLinkSelector =
@@ -20,7 +20,7 @@ const steps = {
 let myContent;
 
 (function onload() {
-  // console.log('Bogin extenstion', 'onload');
+  // console.log('My extension', 'onload');
   chrome.storage.sync.get(null, (store) => {
     if (!store.data)
       chrome.storage.sync.set({ data: [] }, () => start(store));
@@ -147,7 +147,7 @@ function fillPassword(loginConfig) {
 function whereAmI() {
   const email = sel(emailSelector);
   const pwrd = sel(pwrdSelector);
-  const welcomeBack = sel(welcomBackSelector);
+  const welcomeBack = sel(welcomeBackSelector);
 
   return email
     ? steps.email
@@ -165,13 +165,13 @@ function waitUntilElementExists(selector, callback, callbackArg) {
     const element = sel(selector);
     if (element) {
       clearInterval(intervalId);
-      if (callbackArg) 
+      if (callbackArg)
         callback(callbackArg);
       else callback();
     }
     if (++i === repetitions) {
       window.clearInterval(intervalId);
-      console.log('* Bogin extenstion *', 'waitUntilElementExists() reached max iteration.', 'Element',selector , 'Not Found');
+      // console.log('* My extension *', 'waitUntilElementExists() reached max iteration.', 'Element',selector , 'Not Found');
     }
   }, 100);
 }

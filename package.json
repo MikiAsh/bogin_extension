@@ -1,5 +1,5 @@
 {
-  "name": "Bob One Click Login",
+  "name": "bob-one-click-login",
   "source": "index.html",
   "scripts": {
     "clean-dist": "rm -rf dist && mkdir dist",
